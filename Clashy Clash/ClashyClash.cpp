@@ -14,6 +14,7 @@ int main()
     int WindowDim[2] = {1920, 1080};
     InitWindow(WindowDim[0], WindowDim[1], "Clashy Clash");
     Texture2D Back = LoadTexture("textures/1st.png");
+    ToggleFullscreen();
 
     //Object of character Class
     Character knight{WindowDim[0], WindowDim[1]};
@@ -44,7 +45,6 @@ int main()
         LoadTexture("characters/goblin_run_spritesheet.png")};
 
     enemies.SetTarget(&knight);
-   
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -89,12 +89,12 @@ int main()
                 continue;
             }
             //I knew He will Not let Us down
-           /* else
+            else
             {
                 std::string knightHealth = "Health: ";
                 knightHealth.append(std::to_string(knight.GetHealth()), 0, 5);
                 DrawText(knightHealth.c_str(), 40, 40, 40, RED);
-            }*/
+            }
 
             //Collision Detection
             for (auto prop : props)
@@ -104,27 +104,22 @@ int main()
                     knight.UndoMovement();
                 }
             }
-            //for (auto enemies : hehehaha)
-            
-                enemies.tick(GetFrameTime());
 
-             //Goblin Killing , I know it's Crime But its So fun to kill _________________________________________ Goblins
+            enemies.tick(GetFrameTime());
+
+            //Goblin Killing , I know it's Crime But its So fun to kill _________________________________________ Goblins
             if (knight.IsbuttonPressed())
             {
-                //for (auto enemies : hehehaha)
-                
-                    if (Occured.CollisionOccured(knight.GetCollisionRecWeapon(), enemies.getCollisionRec()))
-                    {
-
-                        enemies.SetAlive(false);
-                        //Health Managment Yeah Our Character gotta Die
-                    }
-                
+                if (Occured.CollisionOccured(knight.GetCollisionRecWeapon(), enemies.getCollisionRec()))
+                {
+                    enemies.SetAlive(false);
+                    //Health Managment Yeah Our Character gotta Die
+                }
             }
             if (Occured.CollisionOccured(knight.GetCollisionRecWeapon(), enemies.getCollisionRec()))
                 knight.GetDamage(enemies.DoDamage());
-            EndDrawing();
         }
+        EndDrawing();
     }
     UnloadTexture(Begin);
     UnloadTexture(Back);
