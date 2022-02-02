@@ -50,7 +50,7 @@ int main()
     while (!WindowShouldClose())
     {
         BeginDrawing();
-        ClearBackground(WHITE);
+        ClearBackground(BLACK);
 
         // Beginning Screen
         if (!IsKeyDown(KEY_ENTER) && ChangeVar == 0)
